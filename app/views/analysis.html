@@ -1,0 +1,86 @@
+<p>Run An Analysis</p>
+
+<form name="form" class="form-horizontal" role="form">
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="tickerSymbol">Symbol:</label>
+    <div class="col-sm-2">
+      <input type="text" ng-model="scenario.tickerSymbol" name="tickerSymbol" id="tickerSymbol" class="form-control" placeholder="Enter Symbol" size="20" required>
+    </div>
+    <span class="error" ng-show="form.tickerSymbol.$error.required || form.startingInvestment.$error.pattern">Ticker Symbol is a required field</span>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="startDate">Start Date:</label>
+    <div class="col-sm-2">
+      <div class="input-group">
+        <input type="text" ng-model="scenario.startDate" name="startDate" id="startDate" class="form-control" uib-datepicker-popup="{{dateFormat}}" is-open="startDateEditorOpened" min-date="minDate" max-date="maxDate" date-disabled="disabled(date, mode)" show-weeks="false" ng-required="true" required/>
+        <span class="input-group-btn">
+          <button type="button" class="btn btn-default" ng-click="openStartDateEditor($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+        </span>
+      </div>
+    </div>
+    <span class="error" ng-show="form.startDate.$error.required || form.startDate.$error.date">Start Date is a required field in pattern yyyy-mm-dd</span>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="endDate">End Date:</label>
+    <div class="col-sm-2">
+      <div class="input-group">
+        <input type="text" ng-model="scenario.endDate" name="endDate" id="endDate" class="form-control" uib-datepicker-popup="{{dateFormat}}" is-open="endDateEditorOpened" min-date="minDate" max-date="maxDate" date-disabled="disabled(date, mode)" show-weeks="false" ng-required="true" required/>
+        <span class="input-group-btn">
+          <button type="button" class="btn btn-default" ng-click="openEndDateEditor($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+        </span>
+      </div>
+    </div>
+    <span class="error" ng-show="form.endDate.$error.required || form.endDate.$error.date">Start Date is a required field</span>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="startingInvestment">Starting Investment:</label>
+    <div class="col-sm-2">
+      <input type="text" ng-model="scenario.startingInvestment" name="startingInvestment" id="startingInvestment" class="form-control"  size="10" step="100" min="0" required ng-pattern="/^[0-9]*$/">
+    </div>
+    <span class="error" ng-show="form.startingInvestment.$error.min || form.startingInvestment.$error.required || form.startingInvestment.$error.pattern">Starting Investment must be an integer > 100</span>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="transactionCost">Transaction Cost:</label>
+    <div class="col-sm-2">
+      <input type="text" ng-model="scenario.transactionCost" name="transactionCost" id="transactionCost" class="form-control"  size="10"  min="0" required ng-pattern="/^[0-9]*[\.]?[0-9]*$/">
+    </div>
+    <span class="error" ng-show="form.transactionCost.$error.min || form.transactionCost.$error.required || form.transactionCost.$error.pattern">Transaction Cost must be an number >= 0</span>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-sm-2">Buy Strategy:</label>
+    <div class="col-sm-4">
+      <my-operand operand="scenario.buyTrigger.operand1" strategy-choices="strategyChoices" name="buyOperand1"></my-operand>
+    </div>
+    <div class="col-sm-1">
+      <select class="form-control input-sm" ng-model="scenario.buyTrigger.operatorName" ng-options="relationalOperator.name as relationalOperator.symbol for relationalOperator in relationalOperatorChoices"></select>
+    </div>
+    <div class="col-sm-4">
+      <my-operand  operand="scenario.buyTrigger.operand2" strategy-choices="strategyChoices" name="buyOperand2"></my-operand>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-sm-2">Sell Strategy:</label>
+    <div class="col-sm-4">
+      <my-operand operand="scenario.sellTrigger.operand1" strategy-choices="strategyChoices" name="sellOperand1"></my-operand>
+    </div>
+    <div class="col-sm-1">
+      <select class="form-control input-sm" ng-model="scenario.sellTrigger.operatorName" ng-options="relationalOperator.name as relationalOperator.symbol for relationalOperator in relationalOperatorChoices"></select>
+    </div>
+    <div class="col-sm-4">
+      <my-operand  operand="scenario.sellTrigger.operand2" strategy-choices="strategyChoices" name="sellOperand2"></my-operand>
+    </div>
+  </div>
+
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button ng-click="runAnalysis()" class="btn btn-default" ng-disabled="form.$invalid">Submit</button>
+    </div>
+  </div>
+</form>
