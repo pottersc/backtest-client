@@ -16,7 +16,8 @@ angular.module('backtestClientApp')
         strategyChoices: '=',
         name: '='
       },
-      link: function(scope, el, attr) {
+    //  link: function(scope, el, attr) {
+      link: function(scope) {
         scope.getStrategy = function(strategyName, strategyChoices){
           var strategy = null;
           for(var i=0;i<strategyChoices.length;i++){

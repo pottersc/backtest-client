@@ -1,8 +1,15 @@
-  <span>
-    <select ng-model="operand.strategyName" ng-options="strategy.name as strategy.label for strategy in strategyChoices"></select>
+  <span class="form-inline">
+    <select ng-model="operand.strategyName" ng-options="strategy.name as strategy.label for strategy in strategyChoices" class="form-control"></select>
     {{getStrategy(operand.strategyName, strategyChoices).value1Label }}
-    <input type="text" ng-model="operand.value1" size="1" ng-show="getStrategy(operand.strategyName, strategyChoices).value1Label" min="0" required ng-pattern="/^[0-9]*$/"/>
+    <input type="text" ng-model="operand.value1" size="3" ng-show="getStrategy(operand.strategyName, strategyChoices).value1Label" min="0" required ng-pattern="/^[0-9]*$/" class="form-control"/>
     {{getStrategy(operand.strategyName, strategyChoices).value2Label }}
-    <input ng-model="operand.value2"  size="1" ng-show="getStrategy(operand.strategyName, strategyChoices).value2Label"/>
+    <input ng-model="operand.value2"  size="3" ng-show="getStrategy(operand.strategyName, strategyChoices).value2Label" class="form-control"/>
   </span>
 
+  <!--<span>-->
+    <!--<select ng-model="operand.strategyName" ng-options="strategy.name as strategy.label for strategy in strategyChoices"></select>-->
+    <!--{{getStrategy(operand.strategyName, strategyChoices).value1Label }}-->
+    <!--<input type="text" ng-model="operand.value1" size="1" ng-show="getStrategy(operand.strategyName, strategyChoices).value1Label" min="0" required ng-pattern="/^[0-9]*$/"/>-->
+    <!--{{getStrategy(operand.strategyName, strategyChoices).value2Label }}-->
+    <!--<input ng-model="operand.value2"  size="1" ng-show="getStrategy(operand.strategyName, strategyChoices).value2Label"/>-->
+  <!--</span>-->

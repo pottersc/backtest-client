@@ -12,28 +12,24 @@ angular
   .module('backtestClientApp', [
     'ngAnimate',
     'ngRoute',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'googlechart'
   ]).config(function ($routeProvider){
   $routeProvider
     .when('/',{
-      templateUrl: 'views/main.html',
-      controller: 'MainCtrl',
-      controllerAs: 'main'
+      templateUrl: 'views/welcome.html'
     })
     .when('/analysis', {
-      templateUrl: 'views/analysis.html',
-      controller: 'AnalysisCtrl',
-      controllerAs: 'analysis'
+      templateUrl: 'views/analysis.html'
+    })
+    .when('/usersGuide', {
+      templateUrl: 'views/usersGuide.html'
     })
     .when('/about',{
-      templateUrl: 'views/about.html',
-      controller: 'AboutCtrl',
-      controllerAs: 'about'
+      templateUrl: 'views/about.html'
     })
     .when('/contact', {
-      templateUrl: 'views/contact.html',
-      controller: 'ContactCtrl',
-      controllerAs: 'contact'
+      templateUrl: 'views/contact.html'
     })
     .otherwise({
       redirectTo: '/'
