@@ -1,8 +1,8 @@
-<p>Run An Analysis</p>
+<h2 class="text-center">Run a Stock Trading Backtest Analysis</h2>
 
 <form name="form" class="form-horizontal" role="form">
   <div class="form-group">
-    <label class="control-label col-sm-2" for="tickerSymbol">Symbol:</label>
+    <label class="control-label col-sm-2" for="tickerSymbol" uib-tooltip="Ticker symbol of the stock to analyze" tooltip-placement="right">Symbol:</label>
     <div class="col-sm-2">
       <input type="text" ng-model="scenario.tickerSymbol" name="tickerSymbol" id="tickerSymbol" class="form-control" placeholder="Enter Symbol" size="20" required>
     </div>
@@ -10,7 +10,7 @@
   </div>
 
   <div class="form-group">
-    <label class="control-label col-sm-2" for="startDate">Start Date:</label>
+    <label class="control-label col-sm-2" for="startDate" uib-tooltip="Date to begin the backtesting analysis" tooltip-placement="right">Start Date:</label>
     <div class="col-sm-2">
       <div class="input-group">
         <input type="text" ng-model="scenario.startDate" name="startDate" id="startDate" class="form-control" uib-datepicker-popup="{{dateFormat}}" is-open="startDateEditorOpened" min-date="minDate" max-date="maxDate" date-disabled="disabled(date, mode)" show-weeks="false" ng-required="true" required/>
@@ -23,7 +23,7 @@
   </div>
 
   <div class="form-group">
-    <label class="control-label col-sm-2" for="endDate">End Date:</label>
+    <label class="control-label col-sm-2" for="endDate" uib-tooltip="Date to stop the backtesting analysis" tooltip-placement="right">End Date:</label>
     <div class="col-sm-2">
       <div class="input-group">
         <input type="text" ng-model="scenario.endDate" name="endDate" id="endDate" class="form-control" uib-datepicker-popup="{{dateFormat}}" is-open="endDateEditorOpened" min-date="minDate" max-date="maxDate" date-disabled="disabled(date, mode)" show-weeks="false" ng-required="true" required/>
@@ -36,7 +36,7 @@
   </div>
 
   <div class="form-group">
-    <label class="control-label col-sm-2" for="startingInvestment">Starting Investment:</label>
+    <label class="control-label col-sm-2" for="startingInvestment" uib-tooltip="Amount of money that will initially be invested" tooltip-placement="right">Starting Investment:</label>
     <div class="col-sm-2">
       <input type="text" ng-model="scenario.startingInvestment" name="startingInvestment" id="startingInvestment" class="form-control"  size="10" step="100" min="0" required ng-pattern="/^[0-9]*$/">
     </div>
@@ -44,7 +44,7 @@
   </div>
 
   <div class="form-group">
-    <label class="control-label col-sm-2" for="transactionCost">Transaction Cost:</label>
+    <label class="control-label col-sm-2" for="transactionCost" uib-tooltip="The cost of each but and sell transaction charged by the broker" tooltip-placement="right">Transaction Cost:</label>
     <div class="col-sm-2">
       <input type="text" ng-model="scenario.transactionCost" name="transactionCost" id="transactionCost" class="form-control"  size="10"  min="0" required ng-pattern="/^[0-9]*[\.]?[0-9]*$/">
     </div>
@@ -52,7 +52,7 @@
   </div>
 
   <div class="form-group">
-    <label class="control-label col-sm-2">Buy Strategy:</label>
+    <label class="control-label col-sm-2" uib-tooltip="The strategy used to determine when to buy a stock." tooltip-placement="right">Buy Strategy:</label>
     <div class="col-sm-4">
       <my-operand operand="scenario.buyTrigger.operand1" strategy-choices="strategyChoices" name="buyOperand1"></my-operand>
     </div>
@@ -65,7 +65,7 @@
   </div>
 
   <div class="form-group" >
-    <label class="control-label col-sm-2">Sell Strategy:</label>
+    <label class="control-label col-sm-2" uib-tooltip="The strategy used to determine when to sell a stock" tooltip-placement="right">Sell Strategy:</label>
     <div class="col-sm-4">
       <my-operand operand="scenario.sellTrigger.operand1" strategy-choices="strategyChoices" name="sellOperand1"></my-operand>
     </div>
@@ -80,9 +80,15 @@
 
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <button ng-click="runAnalysis()" class="btn btn-default" ng-disabled="form.$invalid">Submit</button>
+      <button ng-click="runAnalysis()" class="btn btn-default" ng-disabled="form.$invalid">Run Backtest Analysis</button>
     </div>
   </div>
 </form>
 
-<div google-chart chart="chartObject"  on-select="hideSeries(selectedItem)" style="height:600px; width:100%;"></div>
+
+<div ng-show="chartObject !=null">
+  <div align="center">
+    <img src="/images/qmark.png" width="20" height="20"><a uib-tooltip-html="chartHelp" tooltip-placement="top">Help with backtest chart</a>
+  </div>
+  <div google-chart chart="chartObject"  on-select="hideSeries(selectedItem)" style="height:600px; width:100%;"></div>
+</div>

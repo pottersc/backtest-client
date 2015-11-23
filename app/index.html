@@ -2,24 +2,22 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Stock Trade Backtesting Tool</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
-    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/backtest.css">
     <!-- endbuild -->
   </head>
   <body ng-app="backtestClientApp">
     <!--[if lte IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-
 
     <!-- Add your site or application content here -->
     <div class="header">
@@ -40,7 +38,6 @@
             <ul class="nav nav-pills">
               <li ng-class="{active: isActive('/')}"><a href="#/">Welcome</a></li>
               <li ng-class="{active: isActive('/analysis')}"><a href="#/analysis" >Run Analysis</a></li>
-              <li ng-class="{active: isActive('/usersGuide')}"><a href="#/usersGuide" >Users Guide</a></li>
               <li ng-class="{active: isActive('/about')}"><a href="#/about">About</a></li>
               <li ng-class="{active: isActive('/contact')}"><a href="#/contact">Contact</a></li>
             </ul>
@@ -56,10 +53,9 @@
 
     <div class="footer">
       <div class="container">
-        <p><span class="glyphicon glyphicon-star"></span> developed in Angular JS</p>
+        <p><span class="glyphicon glyphicon-star"></span>The stock backtest application is for informational purposes only and should not be used as investment advice.</p>
       </div>
     </div>
-
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
@@ -73,13 +69,13 @@
     <!-- endbower -->
     <!-- endbuild -->
 
-    <!--<script src="bower_components/angular-bootstrap/ui-bootstrap-tplsXXX.js"></script>-->
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <script src="scripts/app.js"></script>
-        <script src="scripts/directives/myoperand.js"></script>
-        <script src="scripts/controllers/analysis.js"></script>
-        <script src="scripts/controllers/nav.js"></script>
-        <!-- endbuild -->
+
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/directives/myoperand.js"></script>
+    <script src="scripts/controllers/analysis.js"></script>
+    <script src="scripts/services/backtestChartService.js"></script>
+    <!-- endbuild -->
 </body>
 </html>

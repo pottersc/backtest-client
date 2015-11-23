@@ -1,4 +1,21 @@
 # robotstxt.org
+# allow only Google and Bing search engines to find this application
+
+User-agent: google
+Disallow:
+Crawl-delay: 10
+
+User-agent: googlebot
+Disallow:
+Crawl-delay: 10
+
+User-Agent: bing
+Disallow:
+Crawl-delay: 10
+
+User-Agent: bingbot
+Disallow:
+Crawl-delay: 10
 
 User-agent: *
-Disallow:
+Disallow: /

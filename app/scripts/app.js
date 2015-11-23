@@ -22,9 +22,6 @@ angular
     .when('/analysis', {
       templateUrl: 'views/analysis.html'
     })
-    .when('/usersGuide', {
-      templateUrl: 'views/usersGuide.html'
-    })
     .when('/about',{
       templateUrl: 'views/about.html'
     })

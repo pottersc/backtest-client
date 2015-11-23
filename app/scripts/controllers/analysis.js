@@ -8,7 +8,7 @@
  * Controller of the backtestClientApp
  */
 angular.module('backtestClientApp')
-  .controller('AnalysisCtrl', function ($scope, $http, $filter, googleChartApiPromise) {
+  .controller('AnalysisCtrl', function ($scope, $http, $filter, googleChartApiPromise, $sce, backtestChartService) {
     var host = "http://localhost:8080";
  //   var host = "http://backtestservice-pottersc.rhcloud.com/";
 
@@ -91,7 +91,8 @@ angular.module('backtestClientApp')
 
 
     // Setup bindable objects
-    $scope.chartObject = {};
+    $scope.chartObject = null;
+    $scope.chartHelp = $sce.trustAsHtml("Roll mouse on chart to zoom<br>Hold left mouse button to pan left/right<br>Hover over buy/sell tags to view details<br>");
     $scope.hideSeries = hideSeries;
 
     function hideSeries(selectedItem) {
@@ -118,10 +119,7 @@ angular.module('backtestClientApp')
       $scope.scenario.startDate = $filter('date')($scope.scenario.startDate, "yyyy-MM-dd");
       $scope.scenario.endDate =  $filter('date')($scope.scenario.endDate, "yyyy-MM-dd");
       $http.post(host+"/backtest/runAnalysis", $scope.scenario).success(function (backtestResults, status) {
-        //  $scope.backtestResults = backtestResults;
         googleChartApiPromise.then(buildChart(backtestResults));
-        //  console.log("runAnalysis:chartObject");
-        //   console.log($scope.chartObject);
       }).error(function(backtestResults, status){
         console.log("error was found" + status + ":" + backtestResults);
       });
@@ -129,6 +127,7 @@ angular.module('backtestClientApp')
 
 
     function buildChart(backtestResults){
+      $scope.chartObject = {};
       $scope.chartObject.type = 'LineChart';
       $scope.chartObject.displayed = false;
       var data = new google.visualization.DataTable();
@@ -162,7 +161,7 @@ angular.module('backtestClientApp')
       });
 
       var options = {
-        title: 'Backtest Analysis Results: Ending Investment='+backtestResults.endingInvestment,
+        title: 'Backtest Analysis Results: Ending Investment='+ $filter('currency')(backtestResults.endingInvestment),
         legend: { position: 'top', maxLines: 2},
         displayAnnotations: true,
         explorer: {
@@ -211,7 +210,7 @@ angular.module('backtestClientApp')
     }
 
     function getTradeAnnotationText(tradeDay){
-      return tradeDay.action + ' ' + $filter('number')(tradeDay.numberSharesTraded) + ' shares at ' + $filter('currency')(tradeDay.stockPrice) + ' on '+ $filter('date')(tradeDay.date) + ' with proceeds of ' + $filter('currency')(tradeDay.investmentValue);
+      return tradeDay.action + ' ' + $filter('number')(tradeDay.numberSharesTraded) + ' shares at ' + (tradeDay.stockPrice) + ' on '+ $filter('date')(tradeDay.date) + ' with proceeds of ' + $filter('currency')(tradeDay.investmentValue);
     }
 
     function normalizeGoogleDataTableObject(dataTableObject){
