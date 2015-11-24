@@ -8,12 +8,13 @@
  *
  * Main module of the application.
  */
-angular
+var backtestClientApp = angular
   .module('backtestClientApp', [
     'ngAnimate',
     'ngRoute',
     'ui.bootstrap',
-    'googlechart'
+    'googlechart',
+    'darthwade.dwLoading'
   ]).config(function ($routeProvider){
   $routeProvider
     .when('/',{

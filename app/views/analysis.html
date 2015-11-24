@@ -78,7 +78,7 @@
   </div>
 
 
-  <div class="form-group">
+  <div class="form-group" dw-loading="executingAnalysis" dw-loading-options="{text: false}">
     <div class="col-sm-offset-2 col-sm-10">
       <button ng-click="runAnalysis()" class="btn btn-default" ng-disabled="form.$invalid">Run Backtest Analysis</button>
     </div>
@@ -90,5 +90,8 @@
   <div align="center">
     <img src="/images/qmark.png" width="20" height="20"><a uib-tooltip-html="chartHelp" tooltip-placement="top">Help with backtest chart</a>
   </div>
-  <div google-chart chart="chartObject"  on-select="hideSeries(selectedItem)" style="height:600px; width:100%;"></div>
+  <div google-chart chart="chartObject"  on-select="hideSeries(selectedItem, chartObject)" style="height:600px; width:100%;"></div>
 </div>
+
+
+
