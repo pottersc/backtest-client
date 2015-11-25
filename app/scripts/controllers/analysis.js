@@ -8,20 +8,16 @@
  * Controller of the backtestClientApp
  */
 angular.module('backtestClientApp')
-  .controller('AnalysisCtrl', function ($scope, $http, $filter, googleChartApiPromise, backtestChartService, $sce, $loading) {
-    var host = "http://localhost:8080";
-  //  var host = "http://backtestservice-pottersc.rhcloud.com/";
-
+  .controller('AnalysisCtrl', function ($scope, $http, $filter, googleChartApiPromise, backtestChartService, $sce, $loading, envService) {
+    var backtestServiceUrl =  envService.read('backtestServiceUrl');
 
     $scope.relationalOperatorChoices = null;
-    $http.get(host+"/backtest/relationalOperators").
+    $http.get(backtestServiceUrl+"/backtest/relationalOperators").
       then(function (response) {
         $scope.relationalOperatorChoices = response.data;
       },function (response) {
         alert('Error: cannot read relationalOperatorChoices from server. error='+response.status+': response='+response.data);
       });
-
-
 
       $scope.strategyChoices=[
         {name: "SMA", label: "Moving Average", value1: 0, value1Label: "Period", value2: 0, value2Label: ""},
@@ -64,6 +60,7 @@ angular.module('backtestClientApp')
         }
       };
 
+
       $scope.scenario.startDate = new Date(2000,0,1);
       $scope.scenario.endDate = new Date();; //Date(2015,5,1); //Date();
       $scope.dateFormat = 'yyyy-MM-dd';
@@ -75,27 +72,30 @@ angular.module('backtestClientApp')
         return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
       };
 
-      $scope.openStartDateEditor = function($event) {
-        $scope.startDateEditorOpened = true;
+      $scope.openStartDateEditor = function() {
+        $scope.startDateEditorStatus.opened = true;
       };
-      $scope.startDateEditorOpened = false;
+      $scope.startDateEditorStatus = {
+        opened: false
+      };
 
-      $scope.openEndDateEditor = function($event) {
-        $scope.endDateEditorOpened = true;
+      $scope.openEndDateEditor = function() {
+        $scope.endDateEditorStatus.opened = true;
       };
-      $scope.endDateEditorOpened = false;
+      $scope.endDateEditorStatus = {
+        opened: false
+      };
 
 
     $scope.chartObject = null;
-    $scope.chartHelp = $sce.trustAsHtml("Roll mouse on chart to zoom<br>Hold left mouse button to pan left/right<br>Hover over buy/sell tags to view details<br>");
+    $scope.chartHelp = $sce.trustAsHtml("Roll mouse on chart to zoom<br>Hold left mouse button to pan left/right<br>Hover over buy/sell tags to view details<br>Click on legend to hide/show chart lines");
     $scope.hideSeries = backtestChartService.hideSeries;
-
 
     $scope.runAnalysis = function(){
       $scope.scenario.startDate = $filter('date')($scope.scenario.startDate, "yyyy-MM-dd");
       $scope.scenario.endDate =  $filter('date')($scope.scenario.endDate, "yyyy-MM-dd");
       $loading.start('executingAnalysis');
-      $http.post(host+"/backtest/runAnalysis", $scope.scenario).success(function (backtestResults) {
+      $http.post(backtestServiceUrl+"/backtest/runAnalysis", $scope.scenario).success(function (backtestResults) {
         googleChartApiPromise.then($scope.chartObject = backtestChartService.buildChart(backtestResults));
         $loading.finish('executingAnalysis');
       }).error(function(backtestResults, status){
