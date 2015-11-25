@@ -14,8 +14,9 @@ var backtestClientApp = angular
     'ngRoute',
     'ui.bootstrap',
     'googlechart',
-    'darthwade.dwLoading'
-  ]).config(function ($routeProvider){
+    'darthwade.dwLoading',
+    'environment'
+  ]).config(function ($routeProvider, envServiceProvider){
   $routeProvider
     .when('/',{
       templateUrl: 'views/welcome.html'
@@ -32,4 +33,23 @@ var backtestClientApp = angular
     .otherwise({
       redirectTo: '/'
     });
+    // environment profiles are configured using 'angular-environment' package
+    // described at https://www.npmjs.com/package/angular-environment
+    envServiceProvider.config({
+      domains: {
+        development: ['localhost'],
+        production: ['rhcloud.com']
+      },
+      vars: {
+        development: {
+          backtestServiceUrl: 'http://localhost:8080',
+        },
+        production: {
+          backtestServiceUrl: 'http://backtestservice-pottersc.rhcloud.com',
+        }
+      }
+    });
+    envServiceProvider.check();
 });
+
+

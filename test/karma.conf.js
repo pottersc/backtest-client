@@ -32,6 +32,7 @@ module.exports = function(config) {
       'bower_components/underscore/underscore.js',
       'bower_components/spin.js/spin.js',
       'bower_components/angular-loading/angular-loading.js',
+      'bower_components/angular-environment/dist/angular-environment.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",
