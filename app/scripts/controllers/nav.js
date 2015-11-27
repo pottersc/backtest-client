@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * Created by Scott on 11/21/2015.
+ * @author Scott Potter
+ * Simple controller that manages the active tab in the main application web page
  */
-
 angular.module('backtestClientApp')
   .controller('NavCtrl', function ($scope, $location) {
 

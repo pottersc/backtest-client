@@ -1,6 +1,7 @@
 <h2 class="text-center">Run a Stock Trading Backtest Analysis</h2>
 
 <form name="form" class="form-horizontal" role="form">
+  <!--Gather user input for the stock ticker symbol-->
   <div class="form-group">
     <label class="control-label col-sm-2" for="tickerSymbol" uib-tooltip="Ticker symbol of the stock to analyze" tooltip-placement="right">Symbol:</label>
     <div class="col-sm-2">
@@ -9,9 +10,7 @@
     <span class="error" ng-show="form.tickerSymbol.$error.required || form.startingInvestment.$error.pattern">Ticker Symbol is a required field</span>
   </div>
 
-
-
-
+  <!--Gather user input for the trading start date-->
   <div class="form-group">
     <label class="control-label col-sm-2" for="startDate" uib-tooltip="Date to begin the backtesting analysis" tooltip-placement="right">Start Date:</label>
     <div class="col-sm-2">
@@ -25,6 +24,7 @@
     <span class="error" ng-show="form.startDate.$error.required || form.startDate.$error.date">Start Date is a required field in pattern yyyy-mm-dd</span>
   </div>
 
+  <!--Gather user input for the trading end date-->
   <div class="form-group">
     <label class="control-label col-sm-2" for="endDate" uib-tooltip="Date to stop the backtesting analysis" tooltip-placement="right">End Date:</label>
     <div class="col-sm-2">
@@ -38,6 +38,7 @@
     <span class="error" ng-show="form.endDate.$error.required || form.endDate.$error.date">Start Date is a required field</span>
   </div>
 
+  <!--Gather user input for starting investment-->
   <div class="form-group">
     <label class="control-label col-sm-2" for="startingInvestment" uib-tooltip="Amount of money that will initially be invested" tooltip-placement="right">Starting Investment:</label>
     <div class="col-sm-2">
@@ -46,6 +47,7 @@
     <span class="error" ng-show="form.startingInvestment.$error.min || form.startingInvestment.$error.required || form.startingInvestment.$error.pattern">Starting Investment must be an integer > 100</span>
   </div>
 
+  <!--Gather user input for transaction cost-->
   <div class="form-group">
     <label class="control-label col-sm-2" for="transactionCost" uib-tooltip="The cost of each but and sell transaction charged by the broker" tooltip-placement="right">Transaction Cost:</label>
     <div class="col-sm-2">
@@ -54,6 +56,7 @@
     <span class="error" ng-show="form.transactionCost.$error.min || form.transactionCost.$error.required || form.transactionCost.$error.pattern">Transaction Cost must be an number >= 0</span>
   </div>
 
+  <!--Gather user input for scenario buy trigger-->
   <div class="form-group">
     <label class="control-label col-sm-2" uib-tooltip="The strategy used to determine when to buy a stock." tooltip-placement="right">Buy Strategy:</label>
     <div class="col-sm-4">
@@ -67,6 +70,7 @@
     </div>
   </div>
 
+  <!--Gather user input for the scenario sell trigger-->
   <div class="form-group" >
     <label class="control-label col-sm-2" uib-tooltip="The strategy used to determine when to sell a stock" tooltip-placement="right">Sell Strategy:</label>
     <div class="col-sm-4">
@@ -80,7 +84,7 @@
     </div>
   </div>
 
-
+  <!--Button to submit an analysis request-->
   <div class="form-group" dw-loading="executingAnalysis" dw-loading-options="{text: false}">
     <div class="col-sm-offset-2 col-sm-10">
       <button ng-click="runAnalysis()" class="btn btn-default" ng-disabled="form.$invalid">Run Backtest Analysis</button>
@@ -88,7 +92,7 @@
   </div>
 </form>
 
-
+<!--Display the chart if the chartObject has been defined -->
 <div ng-show="chartObject !=null">
   <div align="center">
     <img src="images/qmark.png" width="20" height="20"><a uib-tooltip-html="chartHelp" tooltip-placement="top">Help with backtest chart</a>

@@ -1,12 +1,10 @@
 'use strict';
 
 /**
- * @ngdoc overview
- * @name backtestClientApp
- * @description
- * # backtestClientApp
- *
+ * @author Scott Potter
  * Main module of the application.
+ * Configure application dependencies and  routes.
+ * Also, configure environment variables that need to change when switching from development to production environments
  */
 var backtestClientApp = angular
   .module('backtestClientApp', [
@@ -42,13 +40,14 @@ var backtestClientApp = angular
       },
       vars: {
         development: {
-          backtestServiceUrl: 'http://localhost:8080',
+          backtestServiceUrl: 'http://localhost:8080'
         },
         production: {
-          backtestServiceUrl: 'http://backtestservice-pottersc.rhcloud.com',
+          backtestServiceUrl: 'http://backtestservice-pottersc.rhcloud.com'
         }
       }
     });
+    // This must be called here in order to configure environment profiles
     envServiceProvider.check();
 });
 

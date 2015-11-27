@@ -1,15 +1,16 @@
 'use strict';
 
 /**
- * @ngdoc directive
- * @name backtestClientApp.directive:myOperand
- * @description
- * # myOperand
+ * @author Scott Potter
+ * Define the 'myOperand' directive that describes one half of either a buy or sell strategy
+ * Basically the operand is considered anything on either the left or right side of a relational operator
+ * in the definition of the trade strategy.
+ * An example of an operand is '50 day Simple Moving Average' or 'Closing Stock Price'
  */
 angular.module('backtestClientApp')
   .directive('myOperand', function () {
     return {
-      restrict: 'E',
+      restrict: 'E',  // only match element name
       templateUrl: 'views/my-operand.html',
       scope: {
         operand: '=',
