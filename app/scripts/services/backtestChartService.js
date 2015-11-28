@@ -42,10 +42,10 @@ backtestClientApp.service('backtestChartService', ['googleChartApiPromise', '$fi
     data.addRows(backtestResults.tradeDays.length);
     $.each(backtestResults.tradeDays, function (index, tradeDay) {
       data.setCell(index, 0, createDate(tradeDay.date));
-      data.setCell(index, 1, tradeDay.stockPrice);
+      data.setCell(index, 1, (tradeDay.stockPrice));
       data.setCell(index, 2, getTradeAnnotation(tradeDay));
       data.setCell(index, 3, getTradeAnnotationText(tradeDay));
-      data.setCell(index, 4, tradeDay.investmentValue);
+      data.setCell(index, 4, (tradeDay.investmentValue));
       var colIndex = 5;
       $.each(backtestResults.indicators, function (indicatorIndex, indicator) {
         var indicatorDay = findIndicatorDay(indicator, tradeDay.date);

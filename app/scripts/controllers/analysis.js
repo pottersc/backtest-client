@@ -42,37 +42,37 @@ angular.module('backtestClientApp')
       buyTrigger: {
         operand1: {
           strategyName: "SMA",
-          value1: 50,
+          value1: 20,
           value2: 0
         },
         operatorName: "GREATER_THAN",
         operand2: {
           strategyName: "SMA",
-          value1: 200,
+          value1: 50,
           value2: 0
-        },
+        }
       },
       sellTrigger: {
         operand1: {
           strategyName: "SMA",
-          value1: 50,
+          value1: 20,
           value2: 0
         },
         operatorName: "LESS_THAN",
         operand2: {
           strategyName: "SMA",
-          value1: 200,
+          value1: 50,
           value2: 0
-        },
+        }
       }
     };
 
     // Initialize the scenario startData and endDates and also the corresponding requirements for supporting the
     // corresponding bootstrap datepicker component as described at https://angular-ui.github.io/bootstrap/
-    $scope.scenario.startDate = new Date(2000, 0, 1);
+    $scope.scenario.startDate = new Date(2010, 0, 1);
     $scope.scenario.endDate = new Date();
     $scope.dateFormat = 'yyyy-MM-dd';
-    $scope.minDate = $scope.minDate ? null : new Date(1900, 1, 1);
+    $scope.minDate = $scope.minDate ? null : new Date(2000, 1, 1);
     $scope.maxDate = new Date();
     // Disable weekend selection
     $scope.disabled = function (date, mode) {

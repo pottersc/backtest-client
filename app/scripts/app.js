@@ -36,7 +36,7 @@ var backtestClientApp = angular
     envServiceProvider.config({
       domains: {
         development: ['localhost'],
-        production: ['rhcloud.com']
+        production: ['rhcloud.com','backtest-pottersc.rhcloud.com/']
       },
       vars: {
         development: {

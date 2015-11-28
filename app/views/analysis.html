@@ -95,7 +95,7 @@
 <!--Display the chart if the chartObject has been defined -->
 <div ng-show="chartObject !=null">
   <div align="center">
-    <img src="images/qmark.png" width="20" height="20"><a uib-tooltip-html="chartHelp" tooltip-placement="top">Help with backtest chart</a>
+    <a uib-tooltip-html="chartHelp" tooltip-placement="top">Help with backtest chart</a>
   </div>
   <div google-chart chart="chartObject"  on-select="hideSeries(selectedItem, chartObject)" style="height:600px; width:100%;"></div>
 </div>
